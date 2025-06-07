@@ -1,4 +1,4 @@
-// Modern JavaScript for Enhanced User Experience
+// Modern JavaScript for Enhanced User Experience - Updated for Mikio Harman
 
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -53,11 +53,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize typing effect for hero section
     initTypingEffect();
     
-    // Initialize contact form
-    initContactForm();
-    
     // Initialize project hover effects
     initProjectEffects();
+    
+    // Initialize contact animations
+    initContactAnimations();
+    
+    // Initialize statistics counter
+    initStatsCounter();
 });
 
 // Scroll animations
@@ -76,7 +79,7 @@ function initScrollAnimations() {
     }, observerOptions);
 
     // Add animation classes and observe elements
-    const animateElements = document.querySelectorAll('.timeline-item, .project-card, .skill-category, .contact-method');
+    const animateElements = document.querySelectorAll('.timeline-item, .project-card, .skill-category, .education-card, .contact-method');
     
     animateElements.forEach((el, index) => {
         // Add staggered animation delay
@@ -100,7 +103,7 @@ function initScrollAnimations() {
     }
 }
 
-// Typing effect for hero section
+// Enhanced typing effect for hero section
 function initTypingEffect() {
     const heroTitle = document.querySelector('.hero-title .gradient-text');
     if (!heroTitle) return;
@@ -115,7 +118,9 @@ function initTypingEffect() {
         if (index < text.length) {
             heroTitle.textContent += text.charAt(index);
             index++;
-            setTimeout(typeWriter, 100);
+            // Vary typing speed for more natural effect
+            const delay = Math.random() * 100 + 50;
+            setTimeout(typeWriter, delay);
         } else {
             // Remove cursor after typing is complete
             setTimeout(() => {
@@ -125,76 +130,17 @@ function initTypingEffect() {
     }
     
     // Start typing effect after a delay
-    setTimeout(typeWriter, 1000);
+    setTimeout(typeWriter, 1500);
 }
 
-// Contact form functionality
-function initContactForm() {
-    const contactForm = document.querySelector('.contact-form form');
-    if (!contactForm) return;
-
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const formObject = {};
-        formData.forEach((value, key) => {
-            formObject[key] = value;
-        });
-
-        // Simulate form submission
-        showFormMessage('Thank you for your message! I\'ll get back to you soon.', 'success');
-        contactForm.reset();
-    });
-
-    // Add floating label effect
-    const formInputs = document.querySelectorAll('.form-group input, .form-group textarea');
-    formInputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
-
-        input.addEventListener('blur', function() {
-            if (this.value === '') {
-                this.parentElement.classList.remove('focused');
-            }
-        });
-    });
-}
-
-// Show form message
-function showFormMessage(message, type) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `form-message ${type}`;
-    messageDiv.textContent = message;
-    messageDiv.style.cssText = `
-        padding: 1rem;
-        margin: 1rem 0;
-        border-radius: 0.5rem;
-        background: ${type === 'success' ? 'var(--tech-electric)' : 'var(--salmon-pink)'};
-        color: var(--snow-white);
-        font-weight: 500;
-        animation: slideIn 0.3s ease;
-    `;
-
-    const contactForm = document.querySelector('.contact-form');
-    contactForm.insertBefore(messageDiv, contactForm.firstChild);
-
-    // Remove message after 5 seconds
-    setTimeout(() => {
-        messageDiv.remove();
-    }, 5000);
-}
-
-// Project hover effects
+// Enhanced project hover effects
 function initProjectEffects() {
     const projectCards = document.querySelectorAll('.project-card');
     
     projectCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             // Add subtle tilt effect
-            this.style.transform = 'translateY(-5px) rotateX(5deg) rotateY(5deg)';
+            this.style.transform = 'translateY(-5px) rotateX(2deg) rotateY(2deg)';
             this.style.transition = 'all 0.3s ease';
         });
 
@@ -232,6 +178,90 @@ function initProjectEffects() {
             }, 600);
         });
     });
+}
+
+// Contact section animations
+function initContactAnimations() {
+    const networkNodes = document.querySelectorAll('.network-node');
+    
+    // Add hover effects to network nodes
+    networkNodes.forEach(node => {
+        node.addEventListener('mouseenter', function() {
+            this.style.transform += ' scale(1.1)';
+            this.style.background = 'var(--tech-electric)';
+        });
+        
+        node.addEventListener('mouseleave', function() {
+            this.style.transform = this.style.transform.replace(' scale(1.1)', '');
+            if (!this.classList.contains('main-node')) {
+                this.style.background = 'var(--tech-cyan)';
+            } else {
+                this.style.background = 'var(--primary-forest)';
+            }
+        });
+    });
+
+    // LinkedIn CTA pulse effect
+    const linkedinCTA = document.querySelector('.linkedin-cta');
+    if (linkedinCTA) {
+        setInterval(() => {
+            linkedinCTA.style.boxShadow = '0 0 20px rgba(0, 188, 212, 0.5)';
+            setTimeout(() => {
+                linkedinCTA.style.boxShadow = '';
+            }, 1000);
+        }, 5000);
+    }
+}
+
+// Statistics counter animation
+function initStatsCounter() {
+    const stats = document.querySelectorAll('.stat-number');
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const statsObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = entry.target;
+                const text = target.textContent;
+                
+                if (text.includes('+') && !text.includes('Billions')) {
+                    const num = parseInt(text.replace('+', ''));
+                    animateCounter(target, 0, num, 2000);
+                } else if (text === 'Billions') {
+                    // Special animation for billions
+                    target.style.animation = 'pulse 2s ease-in-out';
+                }
+                
+                statsObserver.unobserve(target);
+            }
+        });
+    }, observerOptions);
+
+    stats.forEach(stat => {
+        statsObserver.observe(stat);
+    });
+}
+
+// Counter animation function
+function animateCounter(element, start, end, duration) {
+    const startTime = performance.now();
+    const originalText = element.textContent;
+    
+    function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        const current = Math.floor(start + (end - start) * progress);
+        element.textContent = current + (originalText.includes('+') ? '+' : '');
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        }
+    }
+    
+    requestAnimationFrame(updateCounter);
 }
 
 // Scroll to top functionality
@@ -281,6 +311,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Enhanced link tracking for analytics
+function trackLinkClick(linkType, destination) {
+    // This function can be used to track user interactions
+    console.log(`User clicked ${linkType} link to ${destination}`);
+    
+    // If you want to add analytics later, you can implement it here
+    // Example: gtag('event', 'click', { 'event_category': linkType, 'event_label': destination });
+}
+
+// Add click tracking to external links
+document.addEventListener('DOMContentLoaded', function() {
+    const socialLinks = document.querySelectorAll('a[href*="linkedin.com"], a[href*="github.com"], a[href*="medium.com"]');
+    
+    socialLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const url = this.href;
+            let platform = '';
+            
+            if (url.includes('linkedin.com')) platform = 'LinkedIn';
+            else if (url.includes('github.com')) platform = 'GitHub';
+            else if (url.includes('medium.com')) platform = 'Medium';
+            
+            trackLinkClick('social', platform);
+        });
+    });
+});
+
 // Add CSS animations
 const style = document.createElement('style');
 style.textContent = `
@@ -302,9 +359,32 @@ style.textContent = `
         }
     }
 
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
     .scroll-to-top:hover {
         background: var(--tech-electric) !important;
         transform: translateY(-2px);
+    }
+
+    .linkedin-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 188, 212, 0.3);
+    }
+
+    .education-card:hover .education-icon {
+        animation: pulse 0.6s ease;
+    }
+
+    .timeline-item:hover .timeline-dot {
+        transform: scale(1.2);
+        background: var(--tech-electric);
     }
 `;
 document.head.appendChild(style);
@@ -331,6 +411,7 @@ window.addEventListener('scroll', debounce(function() {
 function preloadImages() {
     const imageUrls = [
         // Add any image URLs that should be preloaded
+        // Currently using CSS gradients, so no images to preload
     ];
 
     imageUrls.forEach(url => {
@@ -341,3 +422,20 @@ function preloadImages() {
 
 // Initialize preloading
 document.addEventListener('DOMContentLoaded', preloadImages);
+
+// Enhanced keyboard navigation
+document.addEventListener('keydown', function(e) {
+    // Add keyboard shortcuts for better accessibility
+    if (e.ctrlKey || e.metaKey) {
+        switch(e.key) {
+            case 'Home':
+                e.preventDefault();
+                document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
+                break;
+            case 'End':
+                e.preventDefault();
+                document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+                break;
+        }
+    }
+});
