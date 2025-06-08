@@ -19,6 +19,7 @@
     --ocean-blue: #0277BD;
     --deloitte-green: #86BC25;
     --healthcare-blue: #1976D2;
+    --linkedin-blue: #0077B5;
     
     /* Typography */
     --font-primary: 'Inter', sans-serif;
@@ -441,8 +442,9 @@ section {
 .contact-item {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-sm);
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
     font-size: 0.9rem;
     color: var(--accent-mountain);
 }
@@ -451,6 +453,30 @@ section {
     color: var(--tech-cyan);
     width: 16px;
     text-align: center;
+}
+
+.linkedin-connect {
+    margin-top: var(--space-sm);
+}
+
+.linkedin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--linkedin-blue);
+    color: var(--snow-white);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-sm);
+}
+
+.linkedin-btn:hover {
+    background: #005885;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* Experience Section */
@@ -736,7 +762,7 @@ section {
 
 .contact-info h3 {
     color: var(--primary-forest);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: var(--space-sm);
 }
 
@@ -744,9 +770,10 @@ section {
     color: var(--accent-mountain);
     margin-bottom: var(--space-lg);
     line-height: 1.6;
+    font-size: 1.1rem;
 }
 
-.contact-methods {
+.location-info {
     margin-bottom: var(--space-lg);
 }
 
@@ -756,34 +783,28 @@ section {
     gap: var(--space-sm);
     margin-bottom: var(--space-sm);
     color: var(--accent-mountain);
+    font-size: 1.1rem;
 }
 
 .contact-method i {
     color: var(--tech-cyan);
     width: 20px;
-}
-
-.contact-method a {
-    color: var(--accent-mountain);
-    text-decoration: none;
-    transition: var(--transition-fast);
-}
-
-.contact-method a:hover {
-    color: var(--tech-cyan);
+    font-size: 1.2rem;
 }
 
 .cta-section {
     background: var(--fog-light);
-    padding: var(--space-md);
+    padding: var(--space-lg);
     border-radius: var(--radius-md);
     margin-bottom: var(--space-lg);
     text-align: center;
+    border: 2px solid var(--linkedin-blue);
 }
 
 .cta-section h4 {
     color: var(--primary-forest);
     margin-bottom: var(--space-sm);
+    font-size: 1.3rem;
 }
 
 .cta-section p {
@@ -795,30 +816,66 @@ section {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    background: var(--linkedin-blue);
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+}
+
+.linkedin-cta:hover {
+    background: #005885;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.3);
+}
+
+.social-section {
+    text-align: center;
+}
+
+.social-section h4 {
+    color: var(--primary-forest);
+    margin-bottom: var(--space-sm);
+    font-size: 1.2rem;
+}
+
+.social-section p {
+    margin-bottom: var(--space-md);
+    color: var(--accent-mountain);
 }
 
 .social-links {
     display: flex;
+    flex-direction: column;
     gap: var(--space-sm);
-    justify-content: center;
+    align-items: center;
 }
 
 .social-link {
-    width: 45px;
-    height: 45px;
-    background: var(--primary-forest);
-    color: var(--snow-white);
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 50%;
+    gap: var(--space-sm);
+    background: var(--primary-forest);
+    color: var(--snow-white);
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-sm);
     text-decoration: none;
     transition: var(--transition-fast);
+    min-width: 200px;
+    justify-content: flex-start;
 }
 
 .social-link:hover {
     background: var(--tech-cyan);
-    transform: scale(1.1);
+    transform: translateX(5px);
+}
+
+.social-link i {
+    font-size: 1.5rem;
+    width: 24px;
+    text-align: center;
+}
+
+.social-link span {
+    font-weight: 500;
 }
 
 /* Contact Visual Animation */
@@ -831,7 +888,10 @@ section {
 .connection-graphic {
     position: relative;
     width: 300px;
-    height: 300px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .network-node {
@@ -850,7 +910,7 @@ section {
 }
 
 .main-node {
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: var(--primary-forest);
@@ -860,25 +920,42 @@ section {
 }
 
 .network-node:nth-child(2) {
-    top: 10%;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .network-node:nth-child(3) {
-    top: 25%;
-    right: 10%;
+    top: 30%;
+    right: 15%;
 }
 
 .network-node:nth-child(4) {
-    bottom: 25%;
-    right: 10%;
+    bottom: 40%;
+    right: 15%;
 }
 
 .network-node:nth-child(5) {
-    bottom: 10%;
+    bottom: 25%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.connection-text {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: var(--primary-forest);
+}
+
+.connection-text h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.connection-text p {
+    color: var(--mist-gray);
+    font-size: 0.9rem;
 }
 
 @keyframes float {
@@ -949,6 +1026,43 @@ section {
 
 .footer-links a:hover {
     color: var(--tech-cyan);
+}
+
+.footer-social .social-links {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.footer-social .social-link {
+    width: 45px;
+    height: 45px;
+    background: var(--secondary-evergreen);
+    color: var(--snow-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: var(--transition-fast);
+    min-width: auto;
+    padding: 0;
+}
+
+.footer-social .social-link:hover {
+    background: var(--tech-cyan);
+    transform: scale(1.1);
+}
+
+.footer-social .social-link i {
+    font-size: 1.2rem;
+    width: auto;
+}
+
+.footer-connect-text {
+    color: var(--mist-gray);
+    font-size: 0.9rem;
+    font-style: italic;
 }
 
 .footer-bottom {
@@ -1032,7 +1146,7 @@ section {
 
     .connection-graphic {
         width: 250px;
-        height: 250px;
+        height: 300px;
     }
 
     .network-node {
@@ -1068,6 +1182,16 @@ section {
 
     .education-grid {
         grid-template-columns: 1fr;
+    }
+
+    .social-links {
+        align-items: stretch;
+    }
+
+    .social-link {
+        min-width: auto;
+        width: 100%;
+        max-width: 280px;
     }
 }
 
