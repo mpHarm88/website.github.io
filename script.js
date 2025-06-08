@@ -56,6 +56,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize project hover effects
     initProjectEffects();
     
+    // Initialize blog animations
+    initBlogAnimations();
+    
+    // Initialize connect animations
+    initConnectAnimations();
+    
     // Initialize statistics counter
     initStatsCounter();
 });
@@ -76,7 +82,7 @@ function initScrollAnimations() {
     }, observerOptions);
 
     // Add animation classes and observe elements
-    const animateElements = document.querySelectorAll('.timeline-item, .project-card, .skill-category, .education-card, .contact-method');
+    const animateElements = document.querySelectorAll('.timeline-item, .project-card, .skill-category, .education-card, .blog-card, .highlight-item');
     
     animateElements.forEach((el, index) => {
         // Add staggered animation delay
@@ -177,6 +183,85 @@ function initProjectEffects() {
     });
 }
 
+// Blog section animations
+function initBlogAnimations() {
+    const blogCards = document.querySelectorAll('.blog-card');
+    
+    blogCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            const blogLink = this.querySelector('.blog-link');
+            if (blogLink) {
+                blogLink.style.transform = 'translateX(5px)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            const blogLink = this.querySelector('.blog-link');
+            if (blogLink) {
+                blogLink.style.transform = 'translateX(0)';
+            }
+        });
+    });
+
+    // Featured blog card special effect
+    const featuredCard = document.querySelector('.blog-card.featured');
+    if (featuredCard) {
+        setInterval(() => {
+            featuredCard.style.borderColor = 'var(--tech-electric)';
+            setTimeout(() => {
+                featuredCard.style.borderColor = 'var(--tech-cyan)';
+            }, 1000);
+        }, 5000);
+    }
+}
+
+// Connect section animations
+function initConnectAnimations() {
+    const networkNodes = document.querySelectorAll('.network-node');
+    
+    // Add hover effects to network nodes
+    networkNodes.forEach(node => {
+        node.addEventListener('mouseenter', function() {
+            this.style.transform += ' scale(1.1)';
+            this.style.background = 'var(--tech-electric)';
+        });
+        
+        node.addEventListener('mouseleave', function() {
+            this.style.transform = this.style.transform.replace(' scale(1.1)', '');
+            if (!this.classList.contains('main-node')) {
+                this.style.background = 'var(--tech-cyan)';
+            } else {
+                this.style.background = 'var(--primary-forest)';
+            }
+        });
+    });
+
+    // LinkedIn CTA pulse effect
+    const linkedinCTAs = document.querySelectorAll('.linkedin-main-cta, .linkedin-cta');
+    linkedinCTAs.forEach(cta => {
+        setInterval(() => {
+            cta.style.boxShadow = '0 0 25px rgba(0, 188, 212, 0.6)';
+            setTimeout(() => {
+                cta.style.boxShadow = '';
+            }, 1500);
+        }, 8000);
+    });
+
+    // Highlight items hover effect
+    const highlightItems = document.querySelectorAll('.highlight-item');
+    highlightItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(5px)';
+            this.style.borderLeftWidth = '5px';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+            this.style.borderLeftWidth = '3px';
+        });
+    });
+}
+
 // Statistics counter animation
 function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-number');
@@ -191,7 +276,7 @@ function initStatsCounter() {
                 const text = target.textContent;
                 
                 if (text.includes('+') && !text.includes('Billions')) {
-                    const num = parseInt(text.replace('+', ''));
+                    const num = parseFloat(text.replace('+', ''));
                     animateCounter(target, 0, num, 2000);
                 } else if (text === 'Billions') {
                     // Special animation for billions
@@ -212,12 +297,20 @@ function initStatsCounter() {
 function animateCounter(element, start, end, duration) {
     const startTime = performance.now();
     const originalText = element.textContent;
+    const hasDecimal = originalText.includes('.');
     
     function updateCounter(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
         
-        const current = Math.floor(start + (end - start) * progress);
+        let current = start + (end - start) * progress;
+        
+        if (hasDecimal) {
+            current = current.toFixed(1);
+        } else {
+            current = Math.floor(current);
+        }
+        
         element.textContent = current + (originalText.includes('+') ? '+' : '');
         
         if (progress < 1) {
@@ -300,6 +393,14 @@ document.addEventListener('DOMContentLoaded', function() {
             trackLinkClick('social', platform);
         });
     });
+
+    // Track blog link clicks
+    const blogLinks = document.querySelectorAll('.blog-link');
+    blogLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            trackLinkClick('blog', 'Medium');
+        });
+    });
 });
 
 // Add CSS animations
@@ -332,9 +433,24 @@ style.textContent = `
         }
     }
 
+    @keyframes glow {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+        }
+        50% {
+            box-shadow: 0 0 30px rgba(0, 188, 212, 0.8);
+        }
+    }
+
     .scroll-to-top:hover {
         background: var(--tech-electric) !important;
         transform: translateY(-2px);
+    }
+
+    .linkedin-main-cta:hover,
+    .linkedin-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 188, 212, 0.3);
     }
 
     .education-card:hover .education-icon {
@@ -345,56 +461,22 @@ style.textContent = `
         transform: scale(1.2);
         background: var(--tech-electric);
     }
+
+    .blog-card.featured {
+        animation: glow 4s ease-in-out infinite;
+    }
+
+    .highlight-item {
+        transition: all 0.3s ease;
+    }
+
+    .connect-cta .btn:hover {
+        transform: translateY(-2px);
+    }
 `;
 document.head.appendChild(style);
 
 // Performance optimization: Debounce scroll events
 function debounce(func, wait) {
     let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Apply debouncing to scroll events
-window.addEventListener('scroll', debounce(function() {
-    // Any scroll-based functionality can be optimized here
-}, 10));
-
-// Preload images for better performance
-function preloadImages() {
-    const imageUrls = [
-        // Add any image URLs that should be preloaded
-        // Currently using CSS gradients, so no images to preload
-    ];
-
-    imageUrls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-    });
-}
-
-// Initialize preloading
-document.addEventListener('DOMContentLoaded', preloadImages);
-
-// Enhanced keyboard navigation
-document.addEventListener('keydown', function(e) {
-    // Add keyboard shortcuts for better accessibility
-    if (e.ctrlKey || e.metaKey) {
-        switch(e.key) {
-            case 'Home':
-                e.preventDefault();
-                document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
-                break;
-            case 'End':
-                e.preventDefault();
-                document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
-                break;
-        }
-    }
-});
+    return function execute

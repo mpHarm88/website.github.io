@@ -19,8 +19,9 @@
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Connect</a></li>
+                <li><a href="#connect" class="nav-link">Connect</a></li>
             </ul>
             <div class="nav-toggle" id="nav-toggle">
                 <span class="bar"></span>
@@ -125,19 +126,17 @@
                                 <span class="stat-label">Hours Teaching</span>
                             </div>
                         </div>
-                        <div class="contact-info-card">
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>206-841-1490</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>mikioharman@gmail.com</span>
-                            </div>
-                            <div class="contact-item">
+                        <div class="location-info">
+                            <div class="location-item">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span>Seattle, WA</span>
                             </div>
+                        </div>
+                        <div class="connect-cta">
+                            <a href="https://www.linkedin.com/in/mikioharman/" target="_blank" class="btn btn-primary btn-small">
+                                <i class="fab fa-linkedin"></i>
+                                Connect on LinkedIn
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -200,6 +199,96 @@
                         <p>Led data science initiatives and team coordination, building foundational leadership skills in technical project management and team collaboration.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Blog Posts</h2>
+                <div class="section-divider"></div>
+                <p class="section-description">Insights on AI, Data Engineering, and Healthcare Technology</p>
+            </div>
+            <div class="blog-grid">
+                <article class="blog-card featured">
+                    <div class="blog-image">
+                        <div class="blog-category">AI & Healthcare</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>The Future of AI in Healthcare Data Processing</h3>
+                        <p class="blog-excerpt">Exploring how artificial intelligence is revolutionizing the way we process and analyze healthcare data, from real-time patient monitoring to predictive analytics...</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">
+                                <i class="fas fa-calendar"></i>
+                                Recent
+                            </span>
+                            <span class="blog-read-time">
+                                <i class="fas fa-clock"></i>
+                                5 min read
+                            </span>
+                        </div>
+                        <a href="https://medium.com/@mpHarm88" target="_blank" class="blog-link">
+                            Read on Medium
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image gcp-focus">
+                        <div class="blog-category">Cloud Engineering</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Building Scalable ETL Pipelines on Google Cloud Platform</h3>
+                        <p class="blog-excerpt">A deep dive into designing and implementing robust data pipelines using GCP services like Dataflow, BigQuery, and Pub/Sub for enterprise-scale applications...</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">
+                                <i class="fas fa-calendar"></i>
+                                Recent
+                            </span>
+                            <span class="blog-read-time">
+                                <i class="fas fa-clock"></i>
+                                8 min read
+                            </span>
+                        </div>
+                        <a href="https://medium.com/@mpHarm88" target="_blank" class="blog-link">
+                            Read on Medium
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="blog-image data-science">
+                        <div class="blog-category">Data Science</div>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Data Quality and Governance in Healthcare Analytics</h3>
+                        <p class="blog-excerpt">Best practices for ensuring data integrity and compliance when working with sensitive healthcare information in cloud environments...</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">
+                                <i class="fas fa-calendar"></i>
+                                Recent
+                            </span>
+                            <span class="blog-read-time">
+                                <i class="fas fa-clock"></i>
+                                6 min read
+                            </span>
+                        </div>
+                        <a href="https://medium.com/@mpHarm88" target="_blank" class="blog-link">
+                            Read on Medium
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+            <div class="blog-cta">
+                <a href="https://medium.com/@mpHarm88" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-medium"></i>
+                    View All Posts on Medium
+                </a>
             </div>
         </div>
     </section>
@@ -315,35 +404,83 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- Connect Section -->
+    <section id="connect" class="connect">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Let's Connect</h2>
                 <div class="section-divider"></div>
             </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <p>I'm always excited to collaborate on interesting projects in cloud data engineering, AI/ML, and healthcare analytics. The best way to reach me is through LinkedIn - I'd love to hear about your projects and discuss potential collaborations!</p>
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <a href="mailto:mikioharman@gmail.com">mikioharman@gmail.com</a>
+            <div class="connect-content">
+                <div class="connect-info">
+                    <h3>Ready to Collaborate?</h3>
+                    <p>I'm always excited to discuss interesting projects in cloud data engineering, AI/ML, and healthcare analytics. Whether you're looking to collaborate on innovative solutions or explore new opportunities, I'd love to connect.</p>
+                    
+                    <div class="connect-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-cloud"></i>
+                            <div>
+                                <h4>Cloud Data Engineering</h4>
+                                <p>GCP expertise with billions of records processed</p>
+                            </div>
                         </div>
-                        <div class="contact-method">
-                            <i class="fas fa-phone"></i>
-                            <a href="tel:+12068411490">206-841-1490</a>
+                        <div class="highlight-item">
+                            <i class="fas fa-brain"></i>
+                            <div>
+                                <h4>AI & Machine Learning</h4>
+                                <p>Healthcare-focused AI solutions and analytics</p>
+                            </div>
                         </div>
-                        <div class="contact-method">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Seattle, WA</span>
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Mentorship & Teaching</h4>
+                                <p>100+ hours of curriculum development</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/mikioharman/" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/mpHarm88" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
-                        <a href="https://medium.com/@mpHarm88" target="_blank" class="social-link"><i class="fab fa-medium"></i></a>
+
+                    <div class="location-section">
+                        <div class="location-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Located in Seattle, WA</span>
+                        </div>
+                    </div>
+                    
+                    <div class="primary-cta">
+                        <h4>Best Way to Reach Me</h4>
+                        <p>LinkedIn is the most reliable way to connect with me. I'm active there and respond to messages regularly!</p>
+                        <a href="https://www.linkedin.com/in/mikioharman/" target="_blank" class="btn btn-primary linkedin-main-cta">
+                            <i class="fab fa-linkedin"></i>
+                            Message Me on LinkedIn
+                        </a>
+                    </div>
+                </div>
+                <div class="connect-visual">
+                    <div class="connection-graphic">
+                        <div class="network-node main-node">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="network-node" style="--delay: 0.5s">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="network-node" style="--delay: 1s">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="network-node" style="--delay: 1.5s">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="network-node" style="--delay: 2s">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="social-connect">
+                        <h4>Also Find Me On</h4>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/mikioharman/" target="_blank" class="social-link linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://github.com/mpHarm88" target="_blank" class="social-link github" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://medium.com/@mpHarm88" target="_blank" class="social-link medium" title="Medium"><i class="fab fa-medium"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -370,6 +507,7 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#experience">Experience</a></li>
+                        <li><a href="#blog">Blog</a></li>
                         <li><a href="#projects">Projects</a></li>
                     </ul>
                 </div>
