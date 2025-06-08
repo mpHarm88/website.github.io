@@ -1,4 +1,5 @@
 // Modern JavaScript for Enhanced User Experience - Updated for Mikio Harman
+// Note: Removed floating scroll-to-top button to prevent floating menu issues
 
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -264,53 +265,6 @@ function animateCounter(element, start, end, duration) {
     requestAnimationFrame(updateCounter);
 }
 
-// Scroll to top functionality
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-}
-
-// Add scroll to top button
-document.addEventListener('DOMContentLoaded', function() {
-    const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    scrollButton.className = 'scroll-to-top';
-    scrollButton.style.cssText = `
-        position: fixed;
-        bottom: 2rem;
-        right: 2rem;
-        width: 50px;
-        height: 50px;
-        background: var(--tech-cyan);
-        color: var(--snow-white);
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: var(--shadow-lg);
-    `;
-
-    document.body.appendChild(scrollButton);
-
-    scrollButton.addEventListener('click', scrollToTop);
-
-    // Show/hide scroll button based on scroll position
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            scrollButton.style.opacity = '1';
-            scrollButton.style.visibility = 'visible';
-        } else {
-            scrollButton.style.opacity = '0';
-            scrollButton.style.visibility = 'hidden';
-        }
-    });
-});
-
 // Enhanced link tracking for analytics
 function trackLinkClick(linkType, destination) {
     // This function can be used to track user interactions
@@ -368,11 +322,6 @@ style.textContent = `
         }
     }
 
-    .scroll-to-top:hover {
-        background: var(--tech-electric) !important;
-        transform: translateY(-2px);
-    }
-
     .linkedin-cta:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(0, 188, 212, 0.3);
@@ -385,6 +334,10 @@ style.textContent = `
     .timeline-item:hover .timeline-dot {
         transform: scale(1.2);
         background: var(--tech-electric);
+    }
+
+    .hero-social-link:hover {
+        animation: pulse 0.6s ease;
     }
 `;
 document.head.appendChild(style);
@@ -407,22 +360,6 @@ window.addEventListener('scroll', debounce(function() {
     // Any scroll-based functionality can be optimized here
 }, 10));
 
-// Preload images for better performance
-function preloadImages() {
-    const imageUrls = [
-        // Add any image URLs that should be preloaded
-        // Currently using CSS gradients, so no images to preload
-    ];
-
-    imageUrls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-    });
-}
-
-// Initialize preloading
-document.addEventListener('DOMContentLoaded', preloadImages);
-
 // Enhanced keyboard navigation
 document.addEventListener('keydown', function(e) {
     // Add keyboard shortcuts for better accessibility
@@ -438,4 +375,25 @@ document.addEventListener('keydown', function(e) {
                 break;
         }
     }
+});
+
+// Add smooth scrolling behavior for any remaining internal links
+document.addEventListener('DOMContentLoaded', function() {
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+    
+    internalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                const offsetTop = targetElement.offsetTop - 70;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 });
